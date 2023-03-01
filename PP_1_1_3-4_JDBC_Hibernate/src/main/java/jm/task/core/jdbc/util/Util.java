@@ -5,19 +5,25 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Util {
-    // реализуйте настройку соеденения с БД
-    private final static String URL= "jdbc:mysql://localhost:3306/xxx";
-    private final static String NAME = "root";
-    private final static String PASSWORD = "root";
-    private static Connection connection = null;
+    private static String url = "jdbc:mysql://localhost:3306/MySql?useSSL=false&serverTimezone=UTC";
+    private static String user = "root";
+    private static String password = "root";
 
-    public static Connection getConnectionMy() {
-        try {
-            connection = DriverManager.getConnection(URL, NAME, PASSWORD);
-        } catch (SQLException e) {
-            e.printStackTrace();
+    public static Connection createConnection() {
+        Connection connection = null;
+
+        {
+            try {
+                connection = DriverManager.getConnection(url, user, password);
+                connection.setAutoCommit(false);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return connection;
     }
-}
 
+    public void closeConnection () {
+
+    }
+}

@@ -1,25 +1,23 @@
 package jm.task.core.jdbc;
 
+import jm.task.core.jdbc.model.User;
+import jm.task.core.jdbc.service.UserService;
 import jm.task.core.jdbc.service.UserServiceImpl;
 
 public class Main {
-
     public static void main(String[] args) {
-        // Реализуйте алгоритм здесь
-        UserServiceImpl userService = new UserServiceImpl();
-
+        // реализуйте алгоритм здесь
+        UserService userService = new UserServiceImpl();
         userService.createUsersTable();
-        userService.saveUser("Dima1", "Ivanov1", (byte) 36);
-        userService.saveUser("Dima2", "Ivanov2", (byte) 36);
-        userService.saveUser("Dima3", "Ivanov3", (byte) 36);
-        userService.saveUser("Dima4", "Ivanov4", (byte) 36);
-        userService.getAllUsers().forEach(System.out::println);
-        userService.removeUserById(2);
-        userService.getAllUsers().forEach(System.out::println);
+        userService.saveUser("Vadim", "Petrov", (byte) 25);
+        userService.saveUser("Petya", "Petrov", (byte) 30);
+        userService.saveUser("Kolya", "Petrov", (byte) 35);
+        userService.saveUser("Misha", "Petrov", (byte) 40);
+        System.out.println(userService.getAllUsers());
         userService.cleanUsersTable();
-        userService.getAllUsers().forEach(System.out::println);
+        for (User user : userService.getAllUsers()) {
+            System.out.println(user);
+        }
         userService.dropUsersTable();
-//    }
     }
 }
-
